@@ -1,3 +1,6 @@
+"use client";
+
+
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { useState, useEffect } from "react";
 

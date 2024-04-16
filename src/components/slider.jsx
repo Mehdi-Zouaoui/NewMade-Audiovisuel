@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import "../styles/slider.scss";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -15,8 +16,6 @@ import {
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-
-
 const Slider = ({}) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [showAbout, setShowAbout] = useState(false);
@@ -24,7 +23,7 @@ const Slider = ({}) => {
   const slides = [];
   const thumbs = [];
 
-  const setThumbsTitles = (index: Number) => {
+  const setThumbsTitles = (index) => {
     switch (index) {
       case 0:
         return <p>SALLE DE CONFERENCE </p>;
@@ -41,7 +40,7 @@ const Slider = ({}) => {
 
   for (let i = 0; i < 5; i++) {
     slides.push(
-      <SwiperSlide key={`slide-${i}`} className="" tag="li">
+      <SwiperSlide key={`slide-${i}`} className="mainSlide" tag="li">
         <Image
           width={1500}
           height={982}
@@ -50,8 +49,8 @@ const Slider = ({}) => {
           src={`/slider/slide_${i + 1}.jpg`}
           priority
         />
-        <div className="absolute w-full top-1/2 translate-y-[-40%] flex items-center flex-col text-white z-10">
-          <div className="flex items-center justify-center flex-col">
+        <div className="slideContent">
+          <div className="textContent">
             <p>SOLUTIONS</p>
             <h2>SONORISATIONS & AFFICHAGES</h2>
             <p>DYNAMIQUES</p>
@@ -88,6 +87,7 @@ const Slider = ({}) => {
     <div>
       <div className="sliders">
         <Swiper
+          className="galleryMain"
           modules={[
             A11y,
             EffectCoverflow,
@@ -97,7 +97,6 @@ const Slider = ({}) => {
             Thumbs,
           ]}
           navigation
-   
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
@@ -107,6 +106,7 @@ const Slider = ({}) => {
         </Swiper>
 
         <Swiper
+          className="galleryThumb"
           modules={[
             A11y,
             EffectCoverflow,
@@ -116,7 +116,7 @@ const Slider = ({}) => {
             Thumbs,
           ]}
           navigation
-          slidesPerView={3}
+          slidesPerView={5}
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
