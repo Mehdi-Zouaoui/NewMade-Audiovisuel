@@ -1,8 +1,7 @@
 "use client";
 
-
-import { useForm, useFieldArray, Controller } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 const Form = () => {
   const [formField, setFormFields] = useState([]);
@@ -30,41 +29,48 @@ const Form = () => {
   };
 
   return (
-    <div className="container">
-      <div className="formContainer">
-        <form className="contactForm" onSubmit={handleSubmit(onSubmit)}>
+    <div className="w-full">
+      <div className="w-full">
+        <form
+          className="w-full flex justify-between flex-wrap"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <input
-            className="singleField"
+            className="my-[10px] px-[10px] text-black h-[50px] border w-full"
             {...register("name")}
             name="name"
             placeholder="Nom *"
           />
           <input
-            className="doubleField"
+            className="my-[10px] px-[10px] text-black h-[50px] border w-1/2"
             {...register("entreprise")}
             name="entreprise"
             placeholder="Nom de l&rsquo;entreprise * "
           />
           <input
-            className="doubleField"
+            className="my-[10px] px-[10px] text-black h-[50px] border w-1/2"
             {...register("email")}
             name="email"
             placeholder="Adresse e-mail *"
           />
           <input
-            className="singleField"
+            className="my-[10px] px-[10px] text-black h-[50px] border w-full"
             {...register("you")}
             name="you"
             placeholder="Vous êtes ? *"
           />
           <textarea
-            className="textField"
+            className="my-[10px] px-[10px] text-black h-[50px] border w-full"
             {...register("message")}
             name="message"
             placeholder="Décrivez votre projet *"
           />
 
-          <input type="submit" className="submit" value="NOUS CONTACTER" />
+          <input
+            type="submit"
+            className="w-full text-white bg-nmgreen text-bold "
+            value="NOUS CONTACTER"
+          />
         </form>
       </div>
     </div>

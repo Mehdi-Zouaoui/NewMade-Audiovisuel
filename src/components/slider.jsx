@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import "../styles/slider.scss";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import "../styles/slider.scss";
+
 import {
   A11y,
   EffectCoverflow,
@@ -71,13 +72,17 @@ const Slider = ({}) => {
   for (let i = 0; i < 5; i++) {
     thumbs.push(
       <SwiperSlide key={`thumbs-${i}`} className="thumbsSlide" tag="li">
-        <Image
-          width="300"
-          height="100"
-          alt=""
-          layout="responsive"
-          src={`/slider/thumb_${i + 1}.png`}
-        />
+        <div style={{ width: "52%" }}>
+          <Image
+            width={300}
+            height={100}
+            alt=""
+            layout="responsive"
+            objectFit="contain"
+            src={`/slider/thumb_${i + 1}.png`}
+            priority
+          />
+        </div>
         <div className="thumbsContent">{setThumbsTitles(i)}</div>
       </SwiperSlide>
     );

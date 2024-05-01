@@ -1,13 +1,28 @@
+import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Montserrat } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import Form from "../components/form";
 import Ref from "../components/ref";
 import Slider from "../components/slider";
 import { Button } from "../components/ui/button";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between ">
-      <div className="w-full m-auto overflow-x-hidden bg-black">
-        <nav className="absolute z-10 top-9 flex justify-around items-center text-white w-full">
+    <main
+      className={`flex min-h-screen flex-col items-center justify-between ${montserrat.className}`}
+    >
+      <div className="w-full m-auto overflow-x-hidden bg-white">
+        <nav
+          style={{ top: "40px" }}
+          className="absolute z-10  flex justify-around items-center text-white w-full"
+        >
           <Image
             className="newMadeLogo"
             alt=""
@@ -15,31 +30,43 @@ export default function Home() {
             height={70}
             src={`/logo.png`}
           />
-          <ul className="flex w-1/3 justify-between items-start list-none font-xl font-bold  ">
-            <li>Accueil</li>
+          <ul
+            className="flex justify-between  items-start list-none font-xl font-bold pl-10 "
+            style={{ fontSize: "1.1vw", width: "30%" }}
+          >
+            <li className="text-white">Accueil</li>
             <li>Services</li>
-            <li>Produits</li>
+
+            <li>
+              <Link href="/products">Produits</Link>
+            </li>
+
             <li>Contact</li>
           </ul>
         </nav>
         <div>
           <Slider styles={""} />
         </div>
-        <main>
-          <p className="description">
-            <span className="newmade">NEWMADE</span>{" "}
-            <span className="audiovisuel"> AUDIOVISUEL</span> distribue les
-            marques les plus prestigieuses de l&rsquo;industrie de
+        <main className="w-[95%] m-auto">
+          <p
+            style={{ padding: "230px 0 50px 0", fontSize: "2vw" }}
+            className="m-auto w-[67%] font-medium leading-tight"
+          >
+            <span className="text-[#a9a601] font-bold">NEWMADE</span>{" "}
+            <span className="font-extralight italic "> AUDIOVISUEL</span>{" "}
+            distribue les marques les plus prestigieuses de l&rsquo;industrie de
             l&rsquo;automation et audiovisuel. Nous nous fixons comme objectif
             d&rsquo;être l&rsquo;interlocuteur unique des installateurs et
             intégrateurs de notre région.
           </p>
-          <div className="location">
-            <h1>
+          <div className="flex flex-col justify-center items-center mb-24">
+            <h1 className="text-[2.8vw]">
               <span className="first">Nous sommes</span>{" "}
-              <span className="second"> présents</span>
+              <span className="text-[#a9a601]"> présents</span>
             </h1>
-            <h4>au Maroc et en Algérie et prochainement en Tunisie</h4>
+            <h4 className="font-extralight text-[2vw] text-[#6f6f6f]">
+              au Maroc et en Algérie et prochainement en Tunisie
+            </h4>
             <Image
               className="locationsImage"
               alt=""
@@ -48,12 +75,16 @@ export default function Home() {
               src={`/locations.png`}
             ></Image>
           </div>
-          <div className="zoom">
-            <div className="zoomContent">
-              <h3>ZOOM SUR</h3>
-              <h2>VENDÔME</h2>
-              <h4>Be the one. Make it yours</h4>
-              <p>
+          <div className="text-white bg-[#1e2b31] relative pb-[100px] ">
+            <div className="w-2/5" style={{ padding: "20px 0 20px 160px" }}>
+              <h3 className="font-bold text-[#a9a601] text-[1.6vw] brightness-150">
+                ZOOM SUR
+              </h3>
+              <h2 className="text-[2.6vw] mt-[50px]">VENDÔME</h2>
+              <h4 className="text-[2vw] font-[250] ">
+                Be the one. Make it yours
+              </h4>
+              <p className="text-[1.3vw] font-extralight mb-[75px]">
                 Grâce à un design particulièrement soigné, Vendôme
                 s&rsquo;intégrera parfaitement dans les lounge, bars musicaux,
                 hôtels, restaurants et magasins premium et haut de gamme.
@@ -62,83 +93,89 @@ export default function Home() {
                 href="http://vendome.activeaudio.fr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="zoomButton"
+                style={{ border: "2px solid white", padding: "15px 20px" }}
+                className="bg-transparent text-[17px] text-white font-bold w-[200px] "
               >
                 DECOUVRIR
               </a>
             </div>
-            <div className="zoomProduct">
+            <div
+              className="absolute"
+              style={{ bottom: "-120px", right: "-70px" }}
+            >
               <Image src={`/vendome.png`} alt="" width="1000" height="800" />
             </div>
           </div>
-          <div className="us">
-            <div className="content">
-              <div className="text">
-                <h4>
-                  {" "}
-                  <span> Distribution</span> de <br /> produits de référence
+          <div className="flex justify-center bg-white">
+            <div className="flex flex-wrap items-start justify-center py-[50px] w-1/2">
+              <div className="w-1/2">
+                <h4 className=" font-bold text-[1.2vw]">
+                  <span className="text-nmgreen"> Distribution</span> de <br />{" "}
+                  produits de référence
                 </h4>
-                <p>
+                <p className="w-[80%] text-[1vw]">
                   Outre l&rsquo;expédition de nos produits, nous accompagnons
                   nos clients et techniciens dans leurs projets en leurs
                   apportant tout le soutien nécessaire ce qui inclus les plans,
                   les simulations et les aides à la mise-en-service.
                 </p>
               </div>
-              <div className="text">
-                <h4>
+              <div className="w-1/2">
+                <h4 className=" font-bold text-[1.2vw]">
                   Services de{" "}
-                  <span>
+                  <span className="text-nmgreen">
                     gestion <br />
                     de projets
                   </span>{" "}
                 </h4>
-                <p>
+                <p className="w-[80%] text-[1vw]">
                   Nous accompagnons les bureaux d&rsquo;étude, les architectes,
                   les installateurs, les intégrateurs de système lors de la
                   plannification technique en fournissant des informations et en
                   formulant des recommandations.
                 </p>
               </div>
-              <div className="text">
-                <h4>
-                  <span>Suivi personnalisé</span> <br />
+              <div className="w-1/2">
+                <h4 className=" font-bold text-[1.2vw]">
+                  <span className="text-nmgreen">Suivi personnalisé</span>{" "}
+                  <br />
                   Un contact direct
                 </h4>
-                <p>
+                <p className="w-[80%] text-[1vw]">
                   Notre équipe dispose de compétences spécialisées auxquelles
                   vous pouvez vous fier. Vous bénéficierez de conseils
                   personnalisés et adaptés.
                 </p>
               </div>
-              <div className="text">
-                <h4>
-                  {" "}
-                  <span> Formations</span> <br /> de nos partenaires
+              <div className="w-1/2">
+                <h4 className=" font-bold text-[1.2vw]">
+                  <span className="text-nmgreen">Formations</span> <br /> de nos
+                  partenaires
                 </h4>
-                <p>
+                <p className="w-[80%] text-[1vw]">
                   Nous nous positionnons comme un entreprise qui investit
                   considérablement dans l&rsquo;accompagnement de nos
                   partenaires.
                 </p>
               </div>
             </div>
-            <div className="mainContent">
+            <div className="flex justify-center items-center w-[40%] text-[2.4vw] text-bold">
               <p>
                 Nous accompagnons nos partenaires lors de toutes les phases du
-                projet pour garantir une <span>qualité irréprochable</span> des
+                projet pour garantir une{" "}
+                <span className="text-nmgreen"> qualité irréprochable</span> des
                 installations chez les clients.{" "}
               </p>
             </div>
           </div>
-          <div className="ref">
+          <div className="w-full py-[75px]">
             {/* <ul className="refList">
             <li>RÉFÉRENCES</li>
             <li>SONORISATIONS</li>
             <li>ECRANS</li>
           </ul> */}
             <h2>LES RÉFÉRENCES DE NOS FOURNISSEURS À TRAVERS LE MONDE</h2>
-            <div className="imagesContainer">
+            <div className="flex flex-wrap justify-between w-full">
               <Ref image="ref_1" title="Mosque of Saint-Etienne (France)" />
               <Ref image="ref_2" title="Bahrain Parliament (Bahrain)" />
               <Ref image="ref_3" title="Mosque of Mulhouse (France)" />
@@ -158,12 +195,13 @@ export default function Home() {
               <Ref image="ref_8" title="YEONGDEUNGPO ART HALL,COREE DU SUD" />
             </div>
           </div>
-          <div className="marques">
-            <h3>
-              Des marques reconnues, adaptées et de <span>référence</span>{" "}
+          <div className="bg-[#1c2b30] text-white flex flex-col justify-around items-center px-[175px]">
+            <h3 className="w-1/2 text-[2.3vw] self-end mb-0">
+              Des marques reconnues, adaptées et de{" "}
+              <span className="text-nmgreen">référence</span>{" "}
             </h3>
-            <ul className="marquesList">
-              <li className="secondLine">
+            <ul className="p-0 list-none flex flex-col w-[80%]">
+              <li className="flex">
                 <div>
                   <Image
                     width="1100"
@@ -191,12 +229,14 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          <div className="secondZoom">
-            <div className="secondZoomDescription">
-              <p className="catchphrase">Découvrez l&rsquo;écran</p>
-              <h3>X poster PRO</h3>
-              <div className="fistParagraphe">
-                <p className="subtitle">Plusieurs modes de lecture</p>
+          <div className="px-[250px] flex justify-between bg-white">
+            <div className="w-1/2 pt-[100px] text-[2.4vw]">
+              <p className="italic m-0">Découvrez l&rsquo;écran</p>
+              <h3 className="ml-[35px] text-[2.5vw]">X poster PRO</h3>
+              <div className="text-[0.8vw] leading-[1.6]">
+                <p className="text-bold text-black">
+                  Plusieurs modes de lecture
+                </p>
                 <p>
                   Support USB, HDMI Sync & Lan AAP control to play <br />
                   Support WIFI & Ethernet internet connection <br />
@@ -204,9 +244,9 @@ export default function Home() {
                   Any video automatically plays <br />
                   full screen, zero setting, quick and simple
                 </p>
-                <div className="secondZoomQuality">
-                  <div className="qualityContainer">
-                    <div className="imgContainer">
+                <div className="py-[40px]">
+                  <div className="w-[70%] flex justify-between">
+                    <div className="flex flex-col items-center">
                       <Image
                         width="300"
                         height="250"
@@ -214,9 +254,9 @@ export default function Home() {
                         alt=""
                         src={`/secondZoom/hd.png`}
                       />
-                      <p className="imgSubtitle">HD quality</p>
+                      <p className="pt-[20px]">HD quality</p>
                     </div>
-                    <div className="imgContainer">
+                    <div className="flex flex-col item-center">
                       <Image
                         width="300"
                         height="250"
@@ -224,7 +264,7 @@ export default function Home() {
                         alt=""
                         src={`/secondZoom/ultraThin.png`}
                       />
-                      <p className="imgSubtitle">
+                      <p className="pt-[20px]">
                         Global ultra-thin <br /> design (35mm)
                       </p>
                     </div>
@@ -242,15 +282,24 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="secondZoomImage" />
+            <div className="w-[40%] h-[1000px]" />
+            <Image
+              width="300"
+              height="650"
+              layout="responsive"
+              alt=""
+              src={`/secondZoom/ecranCLT.png`}
+            />
           </div>
-          <div className="contact">
-            <div className="left">
-              <p className="contactSubtitle">
+          <div className="flex justify-evenly my-[70px] ">
+            <div className="flex flex-col justify-start w-[30%] text-[18px] text-right">
+              <p className="text-[60px] m-0 flex">
                 Vous avez un projet à réaliser ?
               </p>
-              <h4 className="contactTitle">Parlons-en!</h4>
-              <p className="contactCatch">
+              <h4 className="text-nmgreen text-[60px] font-bold m-0">
+                Parlons-en!
+              </h4>
+              <p className="font-bold">
                 Une équipe pluridisciplinaire est à votre écoute
               </p>
               <p>
@@ -261,11 +310,17 @@ export default function Home() {
                 Amphithéâtres, musées et halls d&rsquo;accueil{" "}
               </p>
             </div>
-            <div className="right"></div>
+            <div className="w-[35%]">
+              {" "}
+              <Form />
+            </div>
           </div>
         </main>
-        <footer>
-          <nav className="footerNavigation">
+        <footer
+          className="flex flex-col bg-[#1e2b31]"
+          style={{ padding: "80px 200px 15px 200px" }}
+        >
+          <nav className="flex items-center justify-between w-full mb-[50px]">
             <Image
               className="newMadeLogo"
               alt=""
@@ -273,7 +328,7 @@ export default function Home() {
               height="60"
               src={`/logo.png`}
             />
-            <ul className="nav">
+            <ul className="flex list-none text-[18px] p-0 w-1/2 text-white justify-between items-start text-bold">
               <li>Accueil</li>
               <li>Services</li>
               <li>Produits</li>
@@ -281,9 +336,9 @@ export default function Home() {
               <li>Contact</li>
             </ul>
           </nav>
-          <div className="footerContent">
-            <div className="infos">
-              <ul className="infosList">
+          <div className="flex w-full justify-between">
+            <div className="flex items-end">
+              <ul className="list-none text-white p-0 text-[15px] leading-[1.7]">
                 <li>10 bis Route de Villiers Adam,</li>
                 <li>95740 FREPILLON, France,</li>
                 <li>contact@newmade-audiovisuel.com</li>
@@ -292,20 +347,26 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div className="newsLetter">
+            <div className="text-white ">
               <p>
                 Inscrivez-vous à notre <span>newsletter</span>{" "}
               </p>
-              <Form></Form>
             </div>
           </div>
-          <div className="socials">
-            <div className="images">
-              <div className="insta"></div>
-              <div className="facebook"></div>
-              <div className="linkedIn"></div>
+          <div className="mt-[100px] flex justify-between">
+            <div className="flex items-center justify-between w-[150px]">
+              <div className="text-nmgreen rounde-full w-[20px] h-[20px] flex justify-center items-center">
+                {" "}
+                <Instagram />
+              </div>
+              <div className="text-nmgreen rounde-full w-[20px] h-[20px] flex justify-center items-center">
+                <Facebook />
+              </div>
+              <div className="text-nmgreen rounde-full w-[20px] h-[20px] flex justify-center items-center">
+                <Linkedin />
+              </div>
             </div>
-            <div className="copyright">
+            <div className="text-[#7d7d7f] text-bold text-[13px]">
               <p>© 2022. All rights reserved. Newmade Audiovisuel</p>
             </div>
           </div>
