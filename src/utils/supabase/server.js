@@ -1,16 +1,22 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
+export function createClient() {
+  //Next.js way to handles cookies with the new App Router.
+  const cookieStore = cookies();
+
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
+      //  
       cookies: {
-        get(name: string) {
+        //How to get cookie
+        get(name) {
           return cookieStore.get(name)?.value;
         },
-        set(name: string, value: string, options: CookieOptions) {
+        //How to set cookie
+        set(name, value, options) {
           try {
             cookieStore.set({ name, value, ...options });
           } catch (error) {
@@ -19,7 +25,8 @@ export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
             // user sessions.
           }
         },
-        remove(name: string, options: CookieOptions) {
+        //How to remove cookie 
+        remove(name, options) {
           try {
             cookieStore.set({ name, value: "", ...options });
           } catch (error) {
@@ -31,4 +38,4 @@ export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
       },
     }
   );
-};
+}

@@ -8,6 +8,6 @@ export default function Admin() {
     if (data) console.log(data);
     if (error) console.log(error);
   };
-  addSpeaker();
+  // addSpeaker();
   return <div>Admin</div>;
 }
