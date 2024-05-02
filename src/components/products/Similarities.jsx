@@ -7,7 +7,7 @@ export default function Similarities() {
 
       <div className="w-full h-full flex justify-between items-end pr-20">
         {similaritiesCard.map((card, index) => (
-          <div className="h-full w-1/5">
+          <div className="h-full w-1/5" key={index}>
             <SimilaritiesCard />
           </div>
         ))}

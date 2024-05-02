@@ -1,5 +1,5 @@
 import { ShoppingCart } from "lucide-react";
-import { useCartProduct } from "../../store";
+import { useCart } from "../../store";
 import CartItem from "../cart/cartItem";
 import { Badge } from "../ui/badge";
 import {
@@ -11,7 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 export default function UserBar({ numberOfProducts }) {
-  const cartQuantity = useCartProduct((state) => state.cartQuantity);
+  const { products, removeItem, clearCart } = useCart();
+
   return (
     <div className="flex">
       <DropdownMenu>
@@ -22,20 +23,21 @@ export default function UserBar({ numberOfProducts }) {
               className="absolute top-[-16px] right-[-16px]"
               variant="destructive"
             >
-              {cartQuantity}
+              {products.length > 0 ? products.length : 0}
             </Badge>
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>Votre Panier</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <CartItem />
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <CartItem />
-          </DropdownMenuItem>{" "}
+          {products.map((item, index) => (
+            <div key={index}>
+              <DropdownMenuItem>
+                <CartItem product={item} />
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+            </div>
+          ))}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

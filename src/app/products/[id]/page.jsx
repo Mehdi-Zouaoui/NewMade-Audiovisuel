@@ -27,15 +27,10 @@ import {
 import { ToastAction } from "../../../components/ui/toast";
 import { Toaster } from "../../../components/ui/toaster";
 import { useToast } from "../../../hooks/use-toast";
-import { useCartProduct } from "../../../store";
+import { useCart } from "../../../store";
 
 export default function ProductPage({}) {
-  const incrementCartQuantity = useCartProduct(
-    (state) => state.incrementCartQuantity
-  );
-  const decrementCartQuantity = useCartProduct(
-    (state) => state.decrementCartQuantity
-  );
+  const { products, addItem, removeItem, clearCart } = useCart();
   const searchParams = useSearchParams();
   const [api, setApi] = React.useState();
   const [current, setCurrent] = React.useState(0);
@@ -44,21 +39,9 @@ export default function ProductPage({}) {
   const [stock, setStock] = React.useState(true);
   const { toast } = useToast();
 
-  const addToCart = () => {
-    console.log("added to cart");
-    incrementCartQuantity();
-    toast({
-      title: "Produit ajouter au panier ",
-      description: "",
-      action: <ToastAction altText="Annuler">Annuler</ToastAction>,
-    });
-  };
-  const handleQuantity = (operator, quantity) => {
-    if (operator === "+") setQuantity(quantity + 1);
-    else {
-      if (quantity === 1) return;
-      else setQuantity(quantity - 1);
-    }
+  const handleAddToCart = () => {
+    const product = { name: "test ", price: "35€" };
+    addItem(product);
   };
   React.useEffect(() => {
     if (!api) {
@@ -164,7 +147,7 @@ export default function ProductPage({}) {
                 -
               </Button>
             </div>
-            <Button className="rounded-full gap-3" onClick={() => addToCart()}>
+            <Button className="rounded-full gap-3" onClick={handleAddToCart}>
               Ajouter au panier <ShoppingCart className="test-sm" size={20} />
             </Button>
           </div>

@@ -1,21 +1,17 @@
 import { create } from "zustand";
 import { createClient } from "./utils/supabase/client";
 const supabase = createClient();
-export const useCartProduct = create((set) => ({
-  cartQuantity: 10,
-  cartProducts: {},
-  incrementCartQuantity: () => {
-    set((state) => ({ cartQuantity: state.cartQuantity + 1 }));
-  },
-  decrementCartQuantity: () => {
-    set((state) => ({ cartQuantity: state.cartQuantity - 1 }));
-  },
 
-  //   addToCart: () => set((state) => ({ bears: state.bears + 1 })),
-  //   removeFromCart: () => set({ bears: 0 }),
-  //   updateCart: (newProducts) => set({ bears: newBears }),
+export const useCart = create((set) => ({
+  products: [],
+  addItem: (product) =>
+    set((state) => ({ products: [...state.products, product] })),
+  removeItem: (productId) =>
+    set((state) => ({
+      products: state.products.filter((product) => product.id !== productId),
+    })),
+  clearCart: () => set({ products: [] }),
 }));
-
 export const useSpeakers = create((set) => ({
   getSpeakers: async () => {
     try {
