@@ -9,9 +9,13 @@ export default function Nav() {
           <Link href="/">Accueil</Link>
         </li>
         <Separator orientation="vertical" />
-        <li>Services</li>
+        <li>
+          <Link href="/system">Systèmes</Link>
+        </li>
         <Separator orientation="vertical" />
-        <li>Produits</li>
+        <li>
+          <Link href="/products">Produits</Link>
+        </li>
         <Separator orientation="vertical" />
         <li>Contact</li>
       </ul>

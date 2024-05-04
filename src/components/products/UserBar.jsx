@@ -32,9 +32,9 @@ export default function UserBar({ numberOfProducts }) {
           <DropdownMenuSeparator />
           {products.map((item, index) => (
             <div key={index}>
-              <DropdownMenuItem>
+              <div>
                 <CartItem product={item} />
-              </DropdownMenuItem>
+              </div>
               <DropdownMenuSeparator />
             </div>
           ))}

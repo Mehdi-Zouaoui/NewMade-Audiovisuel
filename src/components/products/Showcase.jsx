@@ -9,27 +9,30 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-export default function Showcase() {
-  const products = [1, 1, 1, 1, 1];
+export default function Showcase({ speakers }) {
   return (
     <div className="w-full h-full p-10 overflow-y-auto">
       <div className="flex flex-wrap justify-between gap-8">
-        {products.map((product, index) => (
-          <div key={index}>
+        {speakers.map((speaker, index) => (
+          <div key={index} className="w-1/4">
             <Link
               href={{
                 pathname: `/products/${index}`,
-                query: { title: `Product ${index}`, price: `${index + 1}50€` },
+                query: {
+                  id: speaker.id,
+                  title: speaker.name,
+                  price: speaker.price,
+                  description: speaker.description,
+                },
               }}
             >
               <Card>
                 <CardHeader>
-                  <CardTitle>Produit {index}</CardTitle>
+                  <CardTitle> {speaker.name}</CardTitle>
                   <Image alt="" width={250} height={150} src={`/default.png`} />
-                  <CardDescription>Description du produit</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p>Card Content</p>
+                  <CardDescription>{speaker.description}</CardDescription>
                 </CardContent>
                 <CardFooter>
                   <p>Card Footer</p>

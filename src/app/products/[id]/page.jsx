@@ -1,5 +1,12 @@
 "use client";
-import { BadgeCheck, ShoppingCart, Undo2 } from "lucide-react";
+import { randomUUID } from "crypto";
+import {
+  BadgeCheck,
+  Package,
+  PackageOpen,
+  ShoppingCart,
+  Undo2,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -40,8 +47,17 @@ export default function ProductPage({}) {
   const { toast } = useToast();
 
   const handleAddToCart = () => {
-    const product = { name: "test ", price: "35€" };
+    const product = {
+      name: searchParams.get("title"),
+      price: searchParams.get("price"),
+      id: searchParams.get("id"),
+    };
     addItem(product);
+    toast({
+      title: "Scheduled: Catch up ",
+      description: "Friday, February 10, 2023 at 5:57 PM",
+      action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+    });
   };
   React.useEffect(() => {
     if (!api) {
@@ -93,17 +109,23 @@ export default function ProductPage({}) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-1/2 h-3/4 gap-y-6 items-center justify-center ">
+        <div className="flex flex-col w-1/2 h-3/4 gap-y-6 items-center justify-center pr-6">
           <h2 className="text-5xl font-extrabold">
             {searchParams.get("title")}
           </h2>
-          <h3 className="text-4xl font-bold">{searchParams.get("price")}</h3>
+          <h3 className="text-4xl font-bold">{searchParams.get("price")}€</h3>
           {stock === true ? (
-            <p className="text-sm font-bold text-success">In stock</p>
+            <p className="text-sm font-bold text-success flex items-center gap-2">
+              In stock <Package />
+            </p>
           ) : (
-            <p className="text-sm font-bold text-destructive">Out of stock</p>
+            <p className="text-sm font-bold text-destructive flex items-center gap-2">
+              Out of stock <PackageOpen />
+            </p>
           )}
-          <p className="text-gray-600">Description du produit</p>
+          <p className="text-gray-600 text-sm leading-6">
+            {searchParams.get("description")}
+          </p>
           <div>
             <Table>
               <TableCaption>Caractéristique du produit</TableCaption>
