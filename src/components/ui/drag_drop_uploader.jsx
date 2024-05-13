@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { createClient } from "../../utils/supabase/client";
-const DragDropUploader = () => {
+const DragDropUploader = ({folder}) => {
   const supabase = createClient();
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState([]);
