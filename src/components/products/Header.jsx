@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
+import ThemeButton from "../layout/ThemeButton";
 import Nav from "./Nav";
 import SearchBar from "./SearchBar";
 import UserBar from "./UserBar";
-
 export default function Header() {
   const [quantityInCart, setQuantityInCart] = useState(3);
   return (
@@ -14,6 +14,7 @@ export default function Header() {
       </div>
       <Nav />
       <UserBar numberOfProducts={quantityInCart} />
+      <ThemeButton />
     </div>
   );
 }

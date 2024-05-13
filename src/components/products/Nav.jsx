@@ -4,9 +4,13 @@ import { Separator } from "../ui/separator";
 export default function Nav() {
   return (
     <div>
-      <ul className="flex  h-6  gap-3">
+      <ul className="flex  h-6  gap-3 dark:border-slate-200 ">
         <li>
           <Link href="/">Accueil</Link>
+        </li>
+        <Separator orientation="vertical" />
+        <li>
+          <Link href="/admin">Admin</Link>
         </li>
         <Separator orientation="vertical" />
         <li>

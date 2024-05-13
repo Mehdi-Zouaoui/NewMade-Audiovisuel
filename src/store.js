@@ -11,3 +11,8 @@ export const useCart = create((set) => ({
     })),
   clearCart: () => set({ products: [] }),
 }));
+
+export const useAdminPage = create((set) => ({
+  adminPage: "products",
+  setCurrentAdminPage: (adminPage) => set(() => ({ adminPage: adminPage })),
+}));

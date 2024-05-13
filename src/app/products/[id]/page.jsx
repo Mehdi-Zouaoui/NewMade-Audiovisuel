@@ -109,7 +109,7 @@ export default function ProductPage({}) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-1/2 h-3/4 gap-y-6 items-center justify-center pr-6">
+        <div className="flex flex-col w-1/2 h-full gap-y-6 items-center justify-center pr-6 ">
           <h2 className="text-5xl font-extrabold">
             {searchParams.get("title")}
           </h2>
@@ -123,7 +123,7 @@ export default function ProductPage({}) {
               Out of stock <PackageOpen />
             </p>
           )}
-          <p className="text-gray-600 text-sm leading-6">
+          <p className="text-gray-600 text-sm leading-6 h-1/2 overflow-y-auto">
             {searchParams.get("description")}
           </p>
           <div>
@@ -176,9 +176,9 @@ export default function ProductPage({}) {
         </div>
         <Toaster />
       </div>
-      <div className="h-[30%] w-full">
+      {/* <div className="h-[30%] w-full">
         <Similarities />
-      </div>
+      </div> */}
     </div>
   );
 }

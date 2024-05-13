@@ -12,15 +12,17 @@ export default function ProductLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="w-full bg-blue h-screen border">
-          <div className="h-[10%]">
+        <div className="w-full bg-blue h-screen border dark:bg-zinc-800  dark:border-stone-400">
+          <div className="h-[10%] ">
             <Header />
           </div>
           <div className="w-full flex h-[90%]">
-            <div className="w-1/6 h-full border">
+            <div className="w-1/6 h-full border dark:bg-zinc-800 dark:border-stone-400">
               <SideBar />
             </div>
-            <div className="w-5/6 h-full border ">{children}</div>
+            <div className="w-5/6 h-full border dark:bg-zinc-800 dark:border-stone-400">
+              {children}
+            </div>
           </div>
         </div>
       </body>
