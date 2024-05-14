@@ -11,16 +11,16 @@ export default function ThemeToggle() {
     <div className="flex items-center gap-3 ml-3 w-10 h-10">
       <Switch
         id="themeSwitch"
-        checked={theme === "light"}
+        checked={theme === "dark"}
         onCheckedChange={() => {
-          if (theme === "dark") {
-            return setTheme("light");
+          if (theme === "light") {
+            return setTheme("dark");
           }
-          return setTheme("dark");
+          return setTheme("light");
         }}
       />
       <Label htmlFor="themeSwitch">
-        {theme === "light" ? <Sun /> : <Moon />}
+        {theme === "light" ? <Moon /> : <Sun />}
       </Label>
     </div>
   );

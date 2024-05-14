@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { createClient } from "../../utils/supabase/client";
-const DragDropUploader = ({folder}) => {
+const DragDropUploader = ({ form, imagesUrl, setImageUrl }) => {
   const supabase = createClient();
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState([]);
@@ -45,25 +45,41 @@ const DragDropUploader = ({folder}) => {
     setFiles(newFiles);
   };
 
-  const uploadFiles = async (filesArray) => {
+  const uploadFiles = async (filesArray, name) => {
     setUploading(true);
+    console.log(filesArray);
     try {
-      for (const file of filesArray) {
+      filesArray.forEach(async (file, index) => {
         const { data, error } = await supabase.storage
           .from("speakers")
-          .upload(`public/${file.name}`, file, {
+          .upload(`${name}/${name}_${index}`, file, {
             cacheControl: "3600",
             upsert: false,
           });
-
         if (error) {
           throw error;
         }
-      }
+      });
     } catch (error) {
       console.error("Error uploading file:", error.message);
     } finally {
       setUploading(false);
+      fetchImagesUrl(filesArray, name);
+    }
+  };
+
+  const fetchImagesUrl = async (filesArray, name) => {
+    console.log("Fetching images...");
+    try {
+      filesArray.forEach(async (file, index) => {
+        const { data } = supabase.storage
+          .from("speakers")
+          .getPublicUrl(`${name}/${name}_${index}`);
+
+        setImageUrl((oldArray) => [...oldArray, data.publicUrl]);
+      });
+    } catch (e) {
+      console.error("Error uploading file:", error.message);
     }
   };
 
@@ -92,6 +108,13 @@ const DragDropUploader = ({folder}) => {
         >
           Select Files
         </button>
+        <button
+          className="bg-gray-600 text-white px-4 py-2 rounded-md"
+          onClick={() => fetchImagesUrl(files, form.getValues().name)}
+        >
+          Test url object
+        </button>
+
         {files.length > 0 && (
           <div className="mt-4">
             <h2 className="text-lg font-semibold">Selected Files:</h2>
@@ -109,7 +132,9 @@ const DragDropUploader = ({folder}) => {
               ))}
             </ul>
             <div>
-              <Button onClick={() => uploadFiles(files)}>Test upload</Button>
+              <Button onClick={() => uploadFiles(files, form.getValues().name)}>
+                Test upload
+              </Button>
             </div>
           </div>
         )}

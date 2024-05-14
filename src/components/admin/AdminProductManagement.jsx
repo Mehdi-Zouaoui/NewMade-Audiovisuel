@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BadgeAlert, BadgeCheck } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../../components/ui/button";
@@ -42,6 +43,8 @@ const formSchema = z.object({
 });
 
 export default function AdminProductManagement({ supabase }) {
+  const [imagesUrl, setImagesUrl] = useState([]);
+
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -62,8 +65,7 @@ export default function AdminProductManagement({ supabase }) {
     switch (category) {
       case "enceintes":
         const { category: speaker_, ...speakerValues } = values;
-        const speaker = { ...speakerValues };
-        console.log(micro);
+        const speaker = { ...speakerValues, imagesUrl };
         try {
           await createSpeaker(supabase, speaker);
         } catch (e) {
@@ -81,6 +83,7 @@ export default function AdminProductManagement({ supabase }) {
         }
         break;
     }
+    setImagesUrl([]);
   }
 
   return (
@@ -221,7 +224,11 @@ export default function AdminProductManagement({ supabase }) {
           </form>
         </Form>
       </div>
-      <DragDropUploader />
+      <DragDropUploader
+        form={form}
+        imagesUrl={imagesUrl}
+        setImageUrl={setImagesUrl}
+      />
     </div>
   );
 }

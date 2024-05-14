@@ -10,17 +10,13 @@ export const metadata = {
 
 export default function ProductLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="w-full bg-blue h-screen border">
-          <div className="h-[10%]">
-            <Header />
-          </div>
-          <div className="w-full flex h-[90%]">
-            <div className="w-full h-full border ">{children}</div>
-          </div>
-        </div>
-      </body>
-    </html>
+    <div className="w-full bg-blue h-screen border">
+      <div className="h-[10%]">
+        <Header />
+      </div>
+      <div className="w-full flex h-[90%]">
+        <div className="w-full h-full border ">{children}</div>
+      </div>
+    </div>
   );
 }

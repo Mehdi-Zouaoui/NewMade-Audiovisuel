@@ -91,15 +91,30 @@ export default function ProductPage({}) {
           <div>
             <Carousel setApi={setApi} className="w-full max-w-md">
               <CarouselContent>
-                {carouselTest.map((image, index) => (
-                  <CarouselItem key={index}>
-                    <Card>
-                      <CardContent className="flex aspect-square items-center justify-center p-6 h-full">
-                        <Image alt="" width={250} height={150} src={image} />
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                ))}
+                {searchParams.get("imagesUrl").length ? (
+                  <>
+                    {/* {searchParams.get("imagesUrl").map((url) => (
+                      <div>Test</div>
+                    ))} */}
+                  </>
+                ) : (
+                  <>
+                    {carouselTest.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <Card>
+                          <CardContent className="flex aspect-square items-center justify-center p-6 h-full">
+                            <Image
+                              alt=""
+                              width={250}
+                              height={150}
+                              src={image}
+                            />
+                          </CardContent>
+                        </Card>
+                      </CarouselItem>
+                    ))}
+                  </>
+                )}
               </CarouselContent>
               <CarouselPrevious />
               <CarouselNext />

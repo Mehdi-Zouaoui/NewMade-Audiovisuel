@@ -23,6 +23,7 @@ export default function Showcase({ speakers }) {
                   title: speaker.name,
                   price: speaker.price,
                   description: speaker.description,
+                  imagesUrl: speaker.imagesUrl,
                 },
               }}
             >
