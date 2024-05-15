@@ -1,6 +1,6 @@
 import Showcase from "../../components/products/Showcase";
+import { fetchMicros } from "../../utils/supabase/methode";
 import { createClient } from "../../utils/supabase/server";
-
 async function getSpeakers(supabase) {
   try {
     const { data, error } = await supabase
@@ -14,10 +14,11 @@ async function getSpeakers(supabase) {
 export default async function Page() {
   const supabase = createClient();
   const speakers = await getSpeakers(supabase);
-  console.log("speakers : ", speakers);
+  const micros = await fetchMicros(supabase);
+
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <Showcase speakers={speakers} />
+      <Showcase speakers={speakers} micros={micros} />
     </div>
   );
 }

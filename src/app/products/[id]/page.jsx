@@ -89,7 +89,7 @@ export default function ProductPage({}) {
       </div>
       <div className="h-[70%] w-full flex items-center">
         <div className="flex flex-col w-1/2 h-3/4 items-center justify-center ">
-          <div>
+          <div className="flex flex-col items-center justify-center">
             <Carousel setApi={setApi} className="w-full max-w-md">
               <CarouselContent>
                 {searchParams.get("imagesUrl").length ? (
@@ -98,12 +98,7 @@ export default function ProductPage({}) {
                       <CarouselItem key={index}>
                         <Card>
                           <CardContent className="flex aspect-square items-center justify-center p-6 h-full">
-                            <Image
-                              alt=""
-                              width={500}
-                              height={800}
-                              src={url}
-                            />
+                            <Image alt="" width={500} height={800} src={url} />
                           </CardContent>
                         </Card>
                       </CarouselItem>

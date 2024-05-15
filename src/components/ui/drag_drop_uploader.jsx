@@ -47,7 +47,6 @@ const DragDropUploader = ({ form, imagesUrl, setImageUrl }) => {
 
   const uploadFiles = async (filesArray, name) => {
     setUploading(true);
-    console.log(filesArray);
     try {
       filesArray.forEach(async (file, index) => {
         const { data, error } = await supabase.storage

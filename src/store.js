@@ -16,3 +16,8 @@ export const useAdminPage = create((set) => ({
   adminPage: "products",
   setCurrentAdminPage: (adminPage) => set(() => ({ adminPage: adminPage })),
 }));
+
+export const useCategory = create((set) => ({
+  category: "speakers",
+  setCurrentCategory: (category) => set(() => ({ category: category })),
+}));

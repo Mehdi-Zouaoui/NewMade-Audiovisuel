@@ -28,6 +28,7 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { Switch } from "../../components/ui/switch";
+import { Textarea } from "../../components/ui/textarea";
 import { createMicro, createSpeaker } from "../../utils/supabase/methode";
 
 const formSchema = z.object({
@@ -74,8 +75,8 @@ export default function AdminProductManagement({ supabase }) {
         break;
       case "micro":
         const { category: micro_, ...microValues } = values;
-        const micro = { ...microValues };
-        console.log(micro);
+
+        const micro = { ...microValues, imagesUrl };
         try {
           await createMicro(supabase, micro);
         } catch (e) {
@@ -107,7 +108,7 @@ export default function AdminProductManagement({ supabase }) {
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a verified email to display" />
+                        <SelectValue placeholder="Choisir la catégorie" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -188,7 +189,7 @@ export default function AdminProductManagement({ supabase }) {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Input
+                    <Textarea
                       placeholder="Entrer la déscription du produit ... "
                       {...field}
                     />
