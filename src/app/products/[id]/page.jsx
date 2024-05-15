@@ -45,6 +45,7 @@ export default function ProductPage({}) {
   const [quantity, setQuantity] = React.useState(1);
   const [stock, setStock] = React.useState(true);
   const { toast } = useToast();
+  const imagesUrl = JSON.parse(searchParams.get("imagesUrl"));
 
   const handleAddToCart = () => {
     const product = {
@@ -93,9 +94,20 @@ export default function ProductPage({}) {
               <CarouselContent>
                 {searchParams.get("imagesUrl").length ? (
                   <>
-                    {/* {searchParams.get("imagesUrl").map((url) => (
-                      <div>Test</div>
-                    ))} */}
+                    {imagesUrl.map((url, index) => (
+                      <CarouselItem key={index}>
+                        <Card>
+                          <CardContent className="flex aspect-square items-center justify-center p-6 h-full">
+                            <Image
+                              alt=""
+                              width={500}
+                              height={800}
+                              src={url}
+                            />
+                          </CardContent>
+                        </Card>
+                      </CarouselItem>
+                    ))}
                   </>
                 ) : (
                   <>
