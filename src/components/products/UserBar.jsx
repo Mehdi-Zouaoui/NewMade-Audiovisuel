@@ -1,4 +1,4 @@
-import { ShoppingCart, ShoppingBasket, ArrowRight } from "lucide-react";
+import { ArrowRight, ShoppingBasket, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "../../store";
 import CartItem from "../cart/cartItem";
@@ -16,8 +16,8 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
-  SheetHeader,
   SheetFooter,
+  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
@@ -46,7 +46,7 @@ export default function UserBar({ numberOfProducts }) {
               This action cannot be undone. This will permanently delete your
               account and remove your data from our servers.
             </SheetDescription>
-            <div className="min-h-[80vh] flex flex-col gap-y-6 pt-6">
+            <div className="h-[80vh] overflow-y-auto flex flex-col gap-y-6 pt-6">
               {products.map((item, index) => (
                 <div key={index}>
                   <div>
@@ -56,7 +56,7 @@ export default function UserBar({ numberOfProducts }) {
               ))}
             </div>
           </SheetHeader>
-          <SheetFooter >
+          <SheetFooter>
             <Link
               href={`/checkout/`}
               className="flex gap-3 bg-gray-600 text-white p-3 rounded-lg"

@@ -38,9 +38,10 @@ export default function Showcase({ speakers, micros }) {
                       <CardTitle> {speaker.name}</CardTitle>
                       <Image
                         alt=""
+                        className="rounded-xl"
                         width={250}
-                        height={150}
-                        src={`/default.png`}
+                        height={100}
+                        src={speaker.imagesUrl[0]}
                       />
                     </CardHeader>
                     <CardContent className="h-24">
@@ -77,9 +78,10 @@ export default function Showcase({ speakers, micros }) {
                       <CardTitle> {speaker.name}</CardTitle>
                       <Image
                         alt=""
+                        className="rounded-xl"
                         width={250}
-                        height={150}
-                        src={`/default.png`}
+                        height={100}
+                        src={speaker.imagesUrl[0]}
                       />
                     </CardHeader>
                     <CardContent className="h-24">

@@ -1,10 +1,10 @@
 "use client";
-import { randomUUID } from "crypto";
 import {
   BadgeCheck,
   Package,
   PackageOpen,
   ShoppingCart,
+  Trash2,
   Undo2,
 } from "lucide-react";
 import Image from "next/image";
@@ -65,7 +65,7 @@ export default function ProductPage({}) {
             console.log("test", product);
           }}
         >
-          Retirer
+          <Trash2 />
         </ToastAction>
       ),
     });
@@ -92,12 +92,12 @@ export default function ProductPage({}) {
   ];
   return (
     <div className="h-full w-full flex flex-col ">
-      <div className="p-6 text-gray-700">
+      <div className="px-6 pt-6 text-gray-700">
         <Link href={`/products/`}>
           <Undo2 />
         </Link>
       </div>
-      <div className="h-[70%] w-full flex items-center">
+      <div className="h-full w-full flex items-center">
         <div className="flex flex-col w-1/2 h-3/4 items-center justify-center ">
           <div className="flex flex-col items-center justify-center">
             <Carousel setApi={setApi} className="w-full max-w-md">
