@@ -88,13 +88,13 @@ export default function AdminProductManagement({ supabase }) {
   }
 
   return (
-    <div className="flex  items-center justify-around pt-4 h-full">
-      <div className="space-y-8 w-2/3 h-5/6  flex flex-col items-center gap-4">
-        <h4 className="text-2xl font-bold">Ajouter un produit sur le site</h4>
+    <div className="flex items-center justify-around pt-4 px-10 gap-10 h-full">
+      <div className="space-y-8 w-1/2 h-5/6  flex flex-col items-start gap-4">
+        <h4 className="text-2xl font-bold ">Ajouter un produit sur le site</h4>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 w-1/2 "
+            className="space-y-8 w-full "
           >
             <FormField
               control={form.control}
@@ -189,7 +189,8 @@ export default function AdminProductManagement({ supabase }) {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea
+                    <Textarea 
+                    className="whitespace-pre-line"
                       placeholder="Entrer la déscription du produit ... "
                       {...field}
                     />
@@ -204,7 +205,7 @@ export default function AdminProductManagement({ supabase }) {
               name="in_stock"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex justify-center items-center gap-3">
+                  <div className="flex justify-start items-center gap-3">
                     <FormLabel>En stock ? </FormLabel>
                     <FormControl>
                       <Switch
@@ -225,11 +226,14 @@ export default function AdminProductManagement({ supabase }) {
           </form>
         </Form>
       </div>
+      <div className="w-1/2 flex items-center justify-center">
       <DragDropUploader
         form={form}
         imagesUrl={imagesUrl}
         setImageUrl={setImagesUrl}
       />
+      </div>
+     
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function Showcase({ speakers, micros }) {
 
   return (
     <div className="w-full h-full p-10 overflow-y-auto dark:bg-zinc-800">
-      <div className="flex flex-wrap justify-between gap-3 gap-y-10">
+      <div className="flex flex-wrap  gap-6 gap-y-10">
         {category === "speakers" ? (
           <>
             {speakers.map((speaker, index) => (
@@ -44,7 +44,7 @@ export default function Showcase({ speakers, micros }) {
                       />
                     </CardHeader>
                     <CardContent className="h-24">
-                      <CardDescription className="leading-5 line-clamp-3">
+                      <CardDescription className="leading-5 line-clamp-3 ">
                         {speaker.description}
                       </CardDescription>
                     </CardContent>

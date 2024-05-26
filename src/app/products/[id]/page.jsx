@@ -52,12 +52,22 @@ export default function ProductPage({}) {
       name: searchParams.get("title"),
       price: searchParams.get("price"),
       id: searchParams.get("id"),
+      imagesUrl: JSON.parse(searchParams.get("imagesUrl")),
     };
     addItem(product);
     toast({
-      title: "Scheduled: Catch up ",
-      description: "Friday, February 10, 2023 at 5:57 PM",
-      action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      title: `${searchParams.get("title")} à été ajouté au panier`,
+      description: `Prix : ${searchParams.get("price")} €`,
+      action: (
+        <ToastAction
+          altText="Goto schedule to undo"
+          onClick={() => {
+            console.log("test", product);
+          }}
+        >
+          Retirer
+        </ToastAction>
+      ),
     });
   };
   React.useEffect(() => {
@@ -145,7 +155,7 @@ export default function ProductPage({}) {
               Out of stock <PackageOpen />
             </p>
           )}
-          <p className="text-gray-600 text-sm leading-6 h-1/2 overflow-y-auto">
+          <p className="overflow-y-auto  min-h-80 text-gray-600 text-sm leading-6 whitespace-pre-line">
             {searchParams.get("description")}
           </p>
           <div>

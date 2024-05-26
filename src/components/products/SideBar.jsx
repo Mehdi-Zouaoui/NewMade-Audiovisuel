@@ -17,7 +17,7 @@ export default function SideBar() {
   const setCurrentCategory = useCategory((state) => state.setCurrentCategory);
   return (
     <div className="flex flex-col w-full ">
-      <div className="p-8">
+      <div className="px-8 py-3">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>
@@ -54,7 +54,7 @@ export default function SideBar() {
         </Accordion>
       </div>
 
-      <div className="p-8">
+      <div className="px-8 py-3">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>
@@ -62,7 +62,7 @@ export default function SideBar() {
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex flex-col ">
-                <RadioGroup defaultValue="option-one">
+                <RadioGroup defaultValue="">
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="option-one" id="option-one" />
                     <Label htmlFor="option-one">France</Label>
@@ -86,7 +86,7 @@ export default function SideBar() {
         </Accordion>
       </div>
 
-      <div className="p-8">
+      <div className="px-8 py-3">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>
@@ -96,7 +96,7 @@ export default function SideBar() {
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex flex-col ">
-                <RadioGroup defaultValue="option-one">
+                <RadioGroup >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="option-one" id="option-one" />
                     <Label htmlFor="option-one">Marque 1</Label>

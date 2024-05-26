@@ -2,11 +2,15 @@
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { createClient } from "../../utils/supabase/client";
+import { Upload, Trash2, FolderInput, Check, X } from "lucide-react";
+
 const DragDropUploader = ({ form, imagesUrl, setImageUrl }) => {
   const supabase = createClient();
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState([]);
+  const [filesStatus, setFilesStatus] = useState([]);
   const [uploading, setUploading] = useState(false);
+
   const handleDragEnter = (e) => {
     e.preventDefault();
     setDragging(true);
@@ -47,8 +51,10 @@ const DragDropUploader = ({ form, imagesUrl, setImageUrl }) => {
 
   const uploadFiles = async (filesArray, name) => {
     setUploading(true);
+    console.log(name);
     try {
       filesArray.forEach(async (file, index) => {
+        setFilesStatus((oldStatus) => [...oldStatus, false]);
         const { data, error } = await supabase.storage
           .from("speakers")
           .upload(`${name}/${name}_${index}`, file, {
@@ -63,6 +69,7 @@ const DragDropUploader = ({ form, imagesUrl, setImageUrl }) => {
       console.error("Error uploading file:", error.message);
     } finally {
       setUploading(false);
+      setFilesStatus(filesStatus.map(() => true));
       fetchImagesUrl(filesArray, name);
     }
   };
@@ -84,7 +91,7 @@ const DragDropUploader = ({ form, imagesUrl, setImageUrl }) => {
 
   return (
     <div
-      className={`border-2 border-dashed rounded-md p-4 ${
+      className={` w-2/3 min-h-80 border-2 border-dotted rounded-md p-4 ${
         dragging ? "border-blue-500" : "border-gray-300"
       }`}
       onDragEnter={handleDragEnter}
@@ -98,41 +105,46 @@ const DragDropUploader = ({ form, imagesUrl, setImageUrl }) => {
         multiple
         onChange={handleFileInputChange}
       />
-      <div className="flex flex-col items-center justify-center space-y-4">
-        <div className="text-lg font-semibold">Drag & Drop your files here</div>
-        <div>or</div>
-        <button
-          className="bg-gray-600 text-white px-4 py-2 rounded-md"
-          onClick={() => document.querySelector('input[type="file"]').click()}
-        >
-          Select Files
-        </button>
-        <button
-          className="bg-gray-600 text-white px-4 py-2 rounded-md"
-          onClick={() => fetchImagesUrl(files, form.getValues().name)}
-        >
-          Test url object
-        </button>
+      <div className=" min-h-80 flex flex-col items-center justify-around space-y-4">
+        <div className="text-lg font-semibold flex items-center justify-center gap-3">
+          <p>Drag & Drop your files here /</p>
+          <Button
+            variant="outline"
+            onClick={() => document.querySelector('input[type="file"]').click()}
+          >
+            <FolderInput />
+          </Button>
+        </div>
 
         {files.length > 0 && (
           <div className="mt-4">
-            <h2 className="text-lg font-semibold">Selected Files:</h2>
-            <ul className="list-disc list-inside">
+            <h2 className="text-lg font-semibold mb-2">Selected Files:</h2>
+            <ul className="list-disc list-inside mb-9">
               {files.map((file, index) => (
-                <li key={index} className="flex items-center justify-between">
+                <li
+                  key={index}
+                  className="flex items-center gap-3 justify-between"
+                >
+                  <span className="text-xs text-destructive">
+                    <X />
+                  </span>
                   <span>{file.name}</span>
                   <button
                     className="text-red-500"
                     onClick={() => removeFile(index)}
                   >
-                    Remove
+                    <Trash2 />
                   </button>
                 </li>
               ))}
             </ul>
-            <div>
-              <Button onClick={() => uploadFiles(files, form.getValues().name)}>
-                Test upload
+            <div className="flex gap-2 items-center">
+              <p>Upload Files</p>
+              <Button
+                variant="outline"
+                onClick={() => uploadFiles(files, form.getValues().name)}
+              >
+                <Upload />
               </Button>
             </div>
           </div>
