@@ -20,7 +20,7 @@ export default function Showcase({ speakers, micros }) {
         {category === "speakers" ? (
           <>
             {speakers.map((speaker, index) => (
-              <div key={index} className="w-[23%]">
+              <div key={index} className="w-[30%]">
                 <Link
                   href={{
                     pathname: `/products/${index}`,
@@ -36,13 +36,15 @@ export default function Showcase({ speakers, micros }) {
                   <Card>
                     <CardHeader>
                       <CardTitle> {speaker.name}</CardTitle>
-                      <Image
-                        alt=""
-                        className="rounded-xl"
-                        width={250}
-                        height={100}
-                        src={speaker.imagesUrl[0]}
-                      />
+                      <div className="min-h-64 flex items-center pt-3">
+                        <Image
+                          alt=""
+                          className="rounded-xl m-auto"
+                          width={350}
+                          height={100}
+                          src={speaker.imagesUrl[0]}
+                        />
+                      </div>
                     </CardHeader>
                     <CardContent className="h-24">
                       <CardDescription className="leading-5 line-clamp-3 ">
@@ -50,7 +52,7 @@ export default function Showcase({ speakers, micros }) {
                       </CardDescription>
                     </CardContent>
                     <CardFooter>
-                      <p>Card Footer</p>
+                      <p>{speaker.price} € </p>
                     </CardFooter>
                   </Card>
                 </Link>
@@ -76,13 +78,15 @@ export default function Showcase({ speakers, micros }) {
                   <Card>
                     <CardHeader>
                       <CardTitle> {speaker.name}</CardTitle>
-                      <Image
-                        alt=""
-                        className="rounded-xl"
-                        width={250}
-                        height={100}
-                        src={speaker.imagesUrl[0]}
-                      />
+                      <div className="min-h-64 flex items-center ">
+                        <Image
+                          alt=""
+                          className="rounded-xl"
+                          width={250}
+                          height={100}
+                          src={speaker.imagesUrl[0]}
+                        />
+                      </div>
                     </CardHeader>
                     <CardContent className="h-24">
                       <CardDescription className="leading-5 line-clamp-3">
@@ -90,7 +94,7 @@ export default function Showcase({ speakers, micros }) {
                       </CardDescription>
                     </CardContent>
                     <CardFooter>
-                      <p>Card Footer</p>
+                      <p>{speaker.price} €</p>
                     </CardFooter>
                   </Card>
                 </Link>

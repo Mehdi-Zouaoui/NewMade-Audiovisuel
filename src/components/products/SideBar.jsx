@@ -18,7 +18,7 @@ export default function SideBar() {
   return (
     <div className="flex flex-col w-full ">
       <div className="px-8 py-3">
-        <Accordion type="single" collapsible>
+        <Accordion type="single" collapsible defaultValue="item-1">
           <AccordionItem value="item-1">
             <AccordionTrigger>
               <h1 className="text-2xl font-bold dark:text-white">Produits </h1>

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../../components/ui/button";
 import DragDropUploader from "../../components/ui/drag_drop_uploader";
+import { Checkbox } from "../../components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -41,11 +42,32 @@ const formSchema = z.object({
     message: "Description must be at least 2 characters.",
   }),
   in_stock: z.boolean(),
+  filters: z.array(z.string()).refine((value) => value.some((item) => item), {
+    message: "You have to select at least one item.",
+  }),
 });
 
 export default function AdminProductManagement({ supabase }) {
   const [imagesUrl, setImagesUrl] = useState([]);
 
+  const filters = [
+    {
+      id: "france",
+      label: "France",
+    },
+    {
+      id: "algerie",
+      label: "Algérie",
+    },
+    {
+      id: "maroc",
+      label: "Maroc",
+    },
+    {
+      id: "tunisie",
+      label: "Tunisie",
+    },
+  ];
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -55,6 +77,7 @@ export default function AdminProductManagement({ supabase }) {
       price: 0,
       description: "",
       in_stock: false,
+      filters: ["france"],
     },
   });
 
@@ -88,7 +111,7 @@ export default function AdminProductManagement({ supabase }) {
   }
 
   return (
-    <div className="flex items-center justify-around pt-4 px-10 gap-10 h-full">
+    <div className="flex items-center  justify-around pt-4 px-10 gap-10 h-full">
       <div className="space-y-8 w-1/2 h-5/6  flex flex-col items-start gap-4">
         <h4 className="text-2xl font-bold ">Ajouter un produit sur le site</h4>
         <Form {...form}>
@@ -113,24 +136,11 @@ export default function AdminProductManagement({ supabase }) {
                     </FormControl>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>Pays</SelectLabel>
-                        <SelectItem value="algerie">Algérie</SelectItem>
-                        <SelectItem value="maroc">Maroc</SelectItem>
-                        <SelectItem value="tunisie">Tunisie</SelectItem>
-                      </SelectGroup>
-                      <SelectGroup>
                         <SelectLabel>Catégories</SelectLabel>
                         <SelectItem value="enceintes">Enceintes</SelectItem>
                         <SelectItem value="mixage">Table de Mixage</SelectItem>
                         <SelectItem value="micro">Micro</SelectItem>
                         <SelectItem value="ecrans">Ecrans</SelectItem>
-                      </SelectGroup>
-                      <SelectGroup>
-                        <SelectLabel>Fournisseur</SelectLabel>
-                        <SelectItem value="m1">Marque 1</SelectItem>
-                        <SelectItem value="m2">Marque 2</SelectItem>
-                        <SelectItem value="m3">Marque 3</SelectItem>
-                        <SelectItem value="m4">Marque 4</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -148,40 +158,102 @@ export default function AdminProductManagement({ supabase }) {
             />
             <FormField
               control={form.control}
-              name="name"
-              render={({ field }) => (
+              name="items"
+              render={() => (
                 <FormItem>
-                  <FormLabel>Name </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Entrer le nom du produit ..."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>Name</FormDescription>
+                  <div className="mb-4">
+                    <FormLabel className="text-base">Filters</FormLabel>
+                    <FormDescription>
+                      Select the items you want to display in the sidebar.
+                    </FormDescription>
+                  </div>
+                  <div className="flex flex-wrap gap-3 w-full">
+                    {filters.map((item) => (
+                      <FormField
+                        key={item.id}
+                        control={form.control}
+                        name="filters"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.id}
+                              className="flex flex-row items-start space-x-3 space-y-0 w-[30%]"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value?.includes(item.id)}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([
+                                          ...field.value,
+                                          item.id,
+                                        ])
+                                      : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== item.id
+                                          )
+                                        );
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="font-normal">
+                                {item.label}
+                              </FormLabel>
+                            </FormItem>
+                          );
+                        }}
+                      />
+                    ))}
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="price"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      min={1}
-                      {...field}
-                      onChange={(event) => field.onChange(+event.target.value)}
-                    />
-                  </FormControl>
-                  <FormDescription>This is your price.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex w-full gap-3">
+              <div className="w-full">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Entrer le nom du produit ..."
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>Name</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="w-full">
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Price</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min={1}
+                          {...field}
+                          onChange={(event) =>
+                            field.onChange(+event.target.value)
+                          }
+                        />
+                      </FormControl>
+                      <FormDescription>This is your price.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
             <FormField
               control={form.control}
               name="description"
@@ -189,8 +261,8 @@ export default function AdminProductManagement({ supabase }) {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea 
-                    className="whitespace-pre-line"
+                    <Textarea
+                      className="whitespace-pre-line"
                       placeholder="Entrer la déscription du produit ... "
                       {...field}
                     />
@@ -222,18 +294,17 @@ export default function AdminProductManagement({ supabase }) {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Envoyer</Button>
           </form>
         </Form>
       </div>
       <div className="w-1/2 flex items-center justify-center">
-      <DragDropUploader
-        form={form}
-        imagesUrl={imagesUrl}
-        setImageUrl={setImagesUrl}
-      />
+        <DragDropUploader
+          form={form}
+          imagesUrl={imagesUrl}
+          setImageUrl={setImagesUrl}
+        />
       </div>
-     
     </div>
   );
 }
