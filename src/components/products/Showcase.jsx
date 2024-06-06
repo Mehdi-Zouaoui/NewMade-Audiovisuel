@@ -40,7 +40,7 @@ export default function Showcase({ speakers, micros }) {
                           alt="product image"
                           className="rounded-xl m-auto"
                           layout="fill"
-                          objectFit="fill"
+                          objectFit="contain"
                           src={speaker.imagesUrl[0]}
                         />
                       </div>

@@ -1,4 +1,5 @@
 "use client";
+import { Earth, Package, Truck } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -17,12 +18,15 @@ export default function SideBar() {
   const { category } = useCategory();
   const setCurrentCategory = useCategory((state) => state.setCurrentCategory);
   return (
-    <div className="flex flex-col w-full ">
+    <div className="flex flex-col w-full overflow-y-auto overflow-x-hidden h-[98%] ">
       <div className="px-8 py-3">
         <Accordion type="single" collapsible defaultValue="item-1">
           <AccordionItem value="item-1">
             <AccordionTrigger>
-              <h1 className="text-2xl font-bold dark:text-white">Produits </h1>
+              <h1 className="text-2xl font-bold dark:text-white flex items-center gap-3">
+                <Package />
+                Produits{" "}
+              </h1>
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex flex-col ">
@@ -55,11 +59,14 @@ export default function SideBar() {
         </Accordion>
       </div>
 
-      <div className="px-8 py-3">
+      <div className="px-8 py-3 ">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>
-              <h1 className="text-2xl font-bold dark:text-white">Pays </h1>
+              <h1 className="text-2xl font-bold dark:text-white flex items-center gap-3 ">
+                {" "}
+                <Earth /> Pays{" "}
+              </h1>
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex flex-col ">
@@ -87,12 +94,12 @@ export default function SideBar() {
         </Accordion>
       </div>
 
-      <div className="px-8 py-3">
+      <div className="px-8 py-3 flex flex-col gap-5">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>
-              <h1 className="text-2xl font-bold dark:text-white">
-                Fournisseurs
+              <h1 className="text-2xl font-bold dark:text-white flex items-center gap-3">
+                <Truck /> Fournisseurs
               </h1>
             </AccordionTrigger>
             <AccordionContent>
@@ -124,6 +131,7 @@ export default function SideBar() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+
         <PriceRange />
       </div>
     </div>

@@ -28,6 +28,7 @@ import {
   DialogTrigger,
 } from "../../../components/ui/dialog";
 import { Separator } from "../../../components/ui/separator";
+import { Slider } from "../../../components/ui/slider";
 import {
   Table,
   TableBody,
@@ -51,8 +52,12 @@ export default function ProductPage({}) {
   const [quantity, setQuantity] = React.useState(1);
   const [stock, setStock] = React.useState(true);
   const { toast } = useToast();
+  const [imageSize, setImageSize] = React.useState(400);
   const imagesUrl = JSON.parse(searchParams.get("imagesUrl"));
 
+  const handleImageSizeChange = (newSizes) => {
+    setImageSize(newSizes * 1);
+  };
   const handleQuantity = (operator, quantity) => {
     if (operator === "+") setQuantity(quantity + 1);
     else {
@@ -126,8 +131,14 @@ export default function ProductPage({}) {
                     {imagesUrl.map((url, index) => (
                       <CarouselItem key={index} className="basis-full">
                         <Card>
-                          <CardContent className=" aspect-square  p-6 h-full relative">
-                            <Image alt="" width={600} height={500} src={url} />
+                          <CardContent className="  p-6 h-full relative ">
+                            <Image
+                              alt="product image"
+                              width={500}
+                              height={500}
+                              src={url}
+                              className=""
+                            />
                             <Dialog>
                               <DialogTrigger asChild>
                                 <Button
@@ -137,13 +148,19 @@ export default function ProductPage({}) {
                                   <Fullscreen strokeWidth={1} />
                                 </Button>
                               </DialogTrigger>
-                              <DialogContent className="max-w-xl">
-                                <div className="flex items-center space-x-2 w-full h-full">
+                              <DialogContent className="max-w-4xl">
+                                <div className="flex flex-col items-center space-x-2 w-full h-full">
                                   <Image
-                                    width={600}
-                                    height={600}
+                                    width={imageSize}
+                                    height={imageSize}
                                     alt="Picture of the product"
                                     src={url}
+                                  />
+                                  <Slider
+                                    min={400}
+                                    max={1000}
+                                    value={[imageSize]}
+                                    onValueChange={handleImageSizeChange}
                                   />
                                 </div>
                               </DialogContent>
