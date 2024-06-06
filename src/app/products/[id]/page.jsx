@@ -1,6 +1,6 @@
 "use client";
 import {
-  BadgeCheck,
+  Fullscreen,
   Package,
   PackageOpen,
   ShoppingCart,
@@ -11,17 +11,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
+import Informations from "../../../components/products/Informations";
 import Similarities from "../../../components/products/Similarities";
 import { Button } from "../../../components/ui/button";
 import { Card, CardContent } from "../../../components/ui/card";
 import {
   Carousel,
-  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "../../../components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "../../../components/ui/dialog";
+import { Separator } from "../../../components/ui/separator";
 import {
   Table,
   TableBody,
@@ -47,8 +53,17 @@ export default function ProductPage({}) {
   const { toast } = useToast();
   const imagesUrl = JSON.parse(searchParams.get("imagesUrl"));
 
+  const handleQuantity = (operator, quantity) => {
+    if (operator === "+") setQuantity(quantity + 1);
+    else {
+      if (quantity === 1) return;
+      else setQuantity(quantity - 1);
+    }
+  };
+
   const handleAddToCart = () => {
     const product = {
+      quantity: quantity,
       name: searchParams.get("title"),
       price: searchParams.get("price"),
       id: searchParams.get("id"),
@@ -91,46 +106,55 @@ export default function ProductPage({}) {
     "/default.png",
   ];
   return (
-    <div className="h-full w-full flex flex-col ">
+    <div className="h-full w-full flex flex-col overflow-y-auto ">
       <div className="px-6 pt-6 text-gray-700">
         <Link href={`/products/`}>
           <Undo2 />
         </Link>
       </div>
-      <div className="h-full w-full flex items-center">
-        <div className="flex flex-col w-1/2 h-3/4 items-center justify-center ">
+      <div className="h-full w-full flex items-center j">
+        <div className="flex flex-col w-[48%] h-full items-center justify-center ">
           <div className="flex flex-col items-center justify-center">
-            <Carousel setApi={setApi} className="w-full max-w-md">
+            <Carousel
+              setApi={setApi}
+              className="w-full max-w-lg"
+              opts={{ align: "center", loop: true }}
+            >
               <CarouselContent>
                 {searchParams.get("imagesUrl").length ? (
                   <>
                     {imagesUrl.map((url, index) => (
-                      <CarouselItem key={index}>
+                      <CarouselItem key={index} className="basis-full">
                         <Card>
-                          <CardContent className="flex aspect-square items-center justify-center p-6 h-full">
-                            <Image alt="" width={500} height={800} src={url} />
+                          <CardContent className=" aspect-square  p-6 h-full relative">
+                            <Image alt="" width={600} height={500} src={url} />
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <Button
+                                  className="absolute top-10 right-10 opacity-70 p-3"
+                                  variant="outline"
+                                >
+                                  <Fullscreen strokeWidth={1} />
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="max-w-xl">
+                                <div className="flex items-center space-x-2 w-full h-full">
+                                  <Image
+                                    width={600}
+                                    height={600}
+                                    alt="Picture of the product"
+                                    src={url}
+                                  />
+                                </div>
+                              </DialogContent>
+                            </Dialog>
                           </CardContent>
                         </Card>
                       </CarouselItem>
                     ))}
                   </>
                 ) : (
-                  <>
-                    {carouselTest.map((image, index) => (
-                      <CarouselItem key={index}>
-                        <Card>
-                          <CardContent className="flex aspect-square items-center justify-center p-6 h-full">
-                            <Image
-                              alt=""
-                              width={250}
-                              height={150}
-                              src={image}
-                            />
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    ))}
-                  </>
+                  <></>
                 )}
               </CarouselContent>
               <CarouselPrevious />
@@ -141,7 +165,11 @@ export default function ProductPage({}) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-1/2 h-full gap-y-6 items-center justify-center pr-6 ">
+        <div className="h-[90%] w-[4%] self-start">
+          <Separator orientation="vertical" />
+        </div>
+
+        <div className="flex flex-col w-[48%] h-full gap-y-6 items-start justify-center pr-6 ">
           <h2 className="text-5xl font-extrabold">
             {searchParams.get("title")}
           </h2>
@@ -160,7 +188,6 @@ export default function ProductPage({}) {
           </p>
           <div>
             <Table>
-              <TableCaption>Caractéristique du produit</TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[100px]">Référence</TableHead>
@@ -183,7 +210,7 @@ export default function ProductPage({}) {
               </TableBody>
             </Table>
           </div>
-          <div className="flex justify-around w-full">
+          <div className="flex justify-between w-full items-center">
             <div className="flex gap-4 items-center">
               <Button
                 variant="outline"
@@ -204,6 +231,9 @@ export default function ProductPage({}) {
             <Button className="rounded-full gap-3" onClick={handleAddToCart}>
               Ajouter au panier <ShoppingCart className="test-sm" size={20} />
             </Button>
+            <div className="w-1/3">
+              <Informations />
+            </div>
           </div>
         </div>
         <Toaster />

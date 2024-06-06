@@ -1,10 +1,13 @@
 "use client";
-import { useCart } from "../../store";
 import ProductWidget from "../../components/checkout/ProductWidget";
+import { useCart } from "../../store";
 export default function ShoppingCart() {
   const { products, addItem, removeItem, clearCart } = useCart();
   const calculateTotalPrice = (products) => {
-    return products.reduce((total, item) => total + parseFloat(item.price), 0);
+    return products.reduce(
+      (total, item) => total + parseFloat(item.price * item.quantity),
+      0
+    );
   };
 
   return (
@@ -17,7 +20,6 @@ export default function ShoppingCart() {
             </div>
           ))}
         </div>
-       
       </div>
       <div>Price : {calculateTotalPrice(products)}€ </div>
     </div>

@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCategory } from "../../store";
-import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -36,12 +35,12 @@ export default function Showcase({ speakers, micros }) {
                   <Card>
                     <CardHeader>
                       <CardTitle> {speaker.name}</CardTitle>
-                      <div className="min-h-64 flex items-center pt-3">
+                      <div className="h-64 flex items-center pt-3 relative">
                         <Image
-                          alt=""
+                          alt="product image"
                           className="rounded-xl m-auto"
-                          width={350}
-                          height={100}
+                          layout="fill"
+                          objectFit="fill"
                           src={speaker.imagesUrl[0]}
                         />
                       </div>

@@ -7,6 +7,7 @@ import {
 } from "../../components/ui/accordion";
 import { useCategory } from "../../store";
 import Country from "../products/Country";
+import PriceRange from "../products/PriceRange";
 import ProductRange from "../products/ProductRange";
 import Supplier from "../products/Supplier";
 import { Label } from "../ui/label";
@@ -96,7 +97,7 @@ export default function SideBar() {
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex flex-col ">
-                <RadioGroup >
+                <RadioGroup>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="option-one" id="option-one" />
                     <Label htmlFor="option-one">Marque 1</Label>
@@ -123,6 +124,7 @@ export default function SideBar() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+        <PriceRange />
       </div>
     </div>
   );

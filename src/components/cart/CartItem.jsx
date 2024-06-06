@@ -7,13 +7,18 @@ export default function CartItem({ product }) {
   return (
     <div className="w-full">
       <div className="flex gap-x-3 items-center">
-        <Image alt="" width={120} height={150} src={`/default.png`} />
+        <Image
+          alt="product image"
+          width={120}
+          height={150}
+          src={product.imagesUrl[0]}
+        />
         <div>{product.name}</div>
-        <div>{product.price}€</div>
+        <div>{product.quantity}</div>
+        <div>{product.price * product.quantity}€</div>
         <div
           className="text-sm text-destructive"
           onClick={() => {
-            console.log("yesy", product);
             removeItem(product.id);
           }}
         >
