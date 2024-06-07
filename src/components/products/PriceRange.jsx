@@ -30,7 +30,9 @@ export default function PriceRange() {
     <div className="w-full">
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>Prix</CardTitle>
+          <CardTitle>
+            <p className="text-xl">Prix</p>
+          </CardTitle>
           <CardDescription>
             Plage de prix pour la recherche du produit.
           </CardDescription>

@@ -24,9 +24,9 @@ export default function Home() {
           className="absolute z-10  flex justify-around items-center text-white w-full"
         >
           <Image
-            className="newMadeLogo"
-            alt=""
-            width={300}
+            className="w-auto h-auto"
+            alt="logo"
+            width={200}
             height={70}
             src={`/logo.png`}
           />
@@ -322,12 +322,12 @@ export default function Home() {
         >
           <nav className="flex items-center justify-between w-full mb-[50px]">
             <Image
-              className="newMadeLogo"
-              alt=""
-              width="250"
-              height="60"
-              src={`/logo.png`}
-            />
+            className="w-auto h-auto"
+            alt="logo"
+            width={200}
+            height={70}
+            src={`/logo.png`}
+          />
             <ul className="flex list-none text-[18px] p-0 w-1/2 text-white justify-between items-start text-bold">
               <li>Accueil</li>
               <li>Services</li>

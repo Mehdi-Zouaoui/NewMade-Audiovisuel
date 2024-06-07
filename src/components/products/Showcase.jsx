@@ -15,7 +15,7 @@ export default function Showcase({ speakers, micros }) {
 
   return (
     <div className="w-full h-full p-10 overflow-y-auto dark:bg-zinc-800">
-      <div className="flex flex-wrap  gap-6 gap-y-10">
+      <div className="flex flex-wrap  gap-6 gap-y-10 justify-between">
         {category === "speakers" ? (
           <>
             {speakers.map((speaker, index) => (
@@ -38,9 +38,9 @@ export default function Showcase({ speakers, micros }) {
                       <div className="h-64 flex items-center pt-3 relative">
                         <Image
                           alt="product image"
-                          className="rounded-xl m-auto"
-                          layout="fill"
-                          objectFit="contain"
+                          className=" rounded-xl m-auto  object-contain"
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           src={speaker.imagesUrl[0]}
                         />
                       </div>
@@ -51,7 +51,7 @@ export default function Showcase({ speakers, micros }) {
                       </CardDescription>
                     </CardContent>
                     <CardFooter>
-                      <p>{speaker.price} € </p>
+                      <p>{speaker.price} €</p>
                     </CardFooter>
                   </Card>
                 </Link>

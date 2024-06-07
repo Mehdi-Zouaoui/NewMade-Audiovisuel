@@ -77,8 +77,8 @@ const Slider = ({}) => {
             width={300}
             height={100}
             alt=""
+            className="object-contain"
             layout="responsive"
-            objectFit="contain"
             src={`/slider/thumb_${i + 1}.png`}
             priority
           />

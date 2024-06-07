@@ -10,7 +10,13 @@ export default function Header() {
   return (
     <div className="h-full flex items-center justify-around ">
       <div className="bg-black p-3 rounded-xl">
-        <Image alt="" width={150} height={100} src={"/logo.png"} />
+        <Image
+          className="w-full h-auto"
+          alt="logo"
+          width={150}
+          height={70}
+          src={`/logo.png`}
+        />
       </div>
       <div className="w-1/5">
         <SearchBar />
