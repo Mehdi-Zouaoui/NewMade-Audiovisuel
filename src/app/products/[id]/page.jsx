@@ -78,16 +78,6 @@ export default function ProductPage({}) {
     toast({
       title: `${searchParams.get("title")} à été ajouté au panier`,
       description: `Prix : ${searchParams.get("price")} €`,
-      action: (
-        <ToastAction
-          altText="Goto schedule to undo"
-          onClick={() => {
-            console.log("test", product);
-          }}
-        >
-          <Trash2 />
-        </ToastAction>
-      ),
     });
   };
   React.useEffect(() => {
@@ -157,14 +147,13 @@ export default function ProductPage({}) {
                                     src={url}
                                   />
                                   <div className="w-1/2">
-                                  <Slider
-                                    min={400}
-                                    max={1000}
-                                    value={[imageSize]}
-                                    onValueChange={handleImageSizeChange}
-                                  />
+                                    <Slider
+                                      min={400}
+                                      max={1000}
+                                      value={[imageSize]}
+                                      onValueChange={handleImageSizeChange}
+                                    />
                                   </div>
-                                
                                 </div>
                               </DialogContent>
                             </Dialog>
@@ -193,7 +182,10 @@ export default function ProductPage({}) {
           <h2 className="text-5xl font-extrabold">
             {searchParams.get("title")}
           </h2>
-          <h3 className="text-4xl font-bold">{searchParams.get("price")}€ <span className="text-xs">pièce/H.T</span></h3>
+          <h3 className="text-4xl font-bold">
+            {searchParams.get("price")}€{" "}
+            <span className="text-xs">pièce/H.T</span>
+          </h3>
           {stock === true ? (
             <p className="text-sm font-bold text-success flex items-center gap-2">
               In stock <Package />

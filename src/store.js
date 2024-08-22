@@ -3,6 +3,7 @@ import { createClient } from "./utils/supabase/client";
 
 export const useCart = create((set) => ({
   products: [],
+
   addItem: (product) =>
     set((state) => ({ products: [...state.products, product] })),
   removeItem: (productId) =>

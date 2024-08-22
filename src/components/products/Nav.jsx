@@ -21,7 +21,9 @@ export default function Nav() {
           <Link href="/products">Produits</Link>
         </li>
         <Separator orientation="vertical" />
-        <li>Contact</li>
+        <li>
+          <Link href="/contact">Contact</Link>
+        </li>
       </ul>
     </div>
   );
