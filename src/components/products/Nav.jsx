@@ -14,6 +14,11 @@ export default function Nav() {
         </li>
         <Separator orientation="vertical" />
         <li>
+          <Link href="/system">Services</Link>
+        </li>
+        <Separator orientation="vertical" />
+
+        <li>
           <Link href="/system">Systèmes</Link>
         </li>
         <Separator orientation="vertical" />

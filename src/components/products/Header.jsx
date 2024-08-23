@@ -16,6 +16,7 @@ export default function Header() {
           width={150}
           height={70}
           src={`/logo.png`}
+          priority={true} 
         />
       </div>
       <div className="w-1/5">
