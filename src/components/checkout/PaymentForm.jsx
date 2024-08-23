@@ -36,7 +36,19 @@ export default function PaymentForm({ amount }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const appearance = {
+    theme: "stripe",
+    variables: {
+      colorPrimary: "#0570de",
+      colorBackground: "#ffffff",
+      colorText: "#30313d",
+      colorDanger: "#df1b41",
+      fontFamily: "Ideal Sans, system-ui, sans-serif",
+      spacingUnit: "2px",
+      borderRadius: "4px",
+      // See all possible variables below
+    },
+  };
   useEffect(() => {
     axios
       .post("/api/create_payment_intent", {
@@ -84,7 +96,7 @@ export default function PaymentForm({ amount }) {
       {/* <div className="text-2xl"> {amount}€</div> */}
       <form
         onSubmit={handleSubmit}
-        className="bg-slate-400 text-white p-2 rounded-md"
+        className="bg-slate-400 text-white p-2 rounded-md w-full"
       >
         {clientSecret && <PaymentElement />}
         {errorMessage && <div>{errorMessage}</div>}

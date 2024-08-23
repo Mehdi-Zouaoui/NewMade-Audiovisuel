@@ -34,8 +34,8 @@ export default function ProductPage({}) {
           </h2>
           <ShoppingCart />
         </div>
-        <div className="w-1/3 flex justify-center items-center">
-          <div>
+        <div className="w-1/2 flex justify-center items-center">
+          <div className="w-full">
             PaymentForm
             {amount && (
               <Elements

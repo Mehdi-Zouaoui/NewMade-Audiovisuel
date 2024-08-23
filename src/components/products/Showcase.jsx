@@ -1,7 +1,9 @@
 "use client";
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCategory } from "../../store";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -50,8 +52,11 @@ export default function Showcase({ speakers, micros }) {
                         {speaker.description}
                       </CardDescription>
                     </CardContent>
-                    <CardFooter>
+                    <CardFooter className="flex justify-between">
                       <p>{speaker.price} €</p>
+                      <Button variant="outline" size="icon">
+                        <ShoppingCart />
+                      </Button>
                     </CardFooter>
                   </Card>
                 </Link>
@@ -92,8 +97,11 @@ export default function Showcase({ speakers, micros }) {
                         {speaker.description}
                       </CardDescription>
                     </CardContent>
-                    <CardFooter>
+                    <CardFooter className="flex justify-between">
                       <p>{speaker.price} €</p>
+                      <Button variant="outline" size="icon">
+                        <ShoppingCart />
+                      </Button>
                     </CardFooter>
                   </Card>
                 </Link>

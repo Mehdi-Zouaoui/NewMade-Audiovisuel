@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import Informations from "../../../components/products/Informations";
+import Opinions from "../../../components/products/Opinions";
 import Similarities from "../../../components/products/Similarities";
 import { Button } from "../../../components/ui/button";
 import { Card, CardContent } from "../../../components/ui/card";
@@ -195,6 +196,9 @@ export default function ProductPage({}) {
               Out of stock <PackageOpen />
             </p>
           )}
+          <div className="w-full relative h-6">
+            <Opinions />
+          </div>
           <p className="overflow-y-auto  min-h-80 text-gray-600 text-sm leading-6 whitespace-pre-line">
             {searchParams.get("description")}
           </p>
